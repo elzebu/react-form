@@ -2,77 +2,15 @@ import React, { Component } from 'react';
 import Brand from './Brand';
 import Tyre from './Tyre';
 import './App.css';
+import axios from 'axios';
 
 class App extends Component {
 
   state = {
     filter: '',
-    brands: [
-      {
-        id: 1,
-        src: 'https://www.logodesignlove.com/images/classic/michelin-man-running.jpg',
-        name: 'michelin'
-      },
-      {
-        id: 2,
-        src: 'https://www.bridgestoneamericas.com/content/dam/bscorpcomm-sites/bridgestone-americas/images/brand-assets/logos/bridgestone-logos/bridgestone-b-mark-logos/album-cover.png',
-        name: 'bridgestone'
-      },
-      {
-        id: 3,
-        src: 'https://cdn.freebiesupply.com/logos/large/2x/goodyear-racing-logo-png-transparent.png',
-        name: 'goodyear'
-      }
-    ],
-    tyres: [
-      {
-        id: 1,
-        name: 'Energy saver +',
-        brandId: 1,
-        description: `
-        <h3>Points forts</h3>
-        <ul>
-          <li>Economie de carburant</li>
-          <li>Très bonne longévité</li>
-          <li>Excellente adhérence sur sol sec et mouillé</li>
-        </ul>`
-      },
-      {
-        id: 2,
-        name: 'Primacy 4',
-        brandId: 1,
-        description: `
-        <h3>Points forts</h3>
-        <ul>
-          <li>En toute sécurité neuf comme usé</li>
-          <li>Excellente longévité</li>
-          <li>Très hautes performances de freinage sur sol mouillé</li>
-        </ul>`
-      },
-      {
-        id: 3,
-        name: 'CrossClimate +',
-        brandId: 1,
-        description: `
-        <h3>Points forts</h3>
-        <ul>
-          <li>Armez-vous face aux aléas climatiques, jusqu'au dernier kilomètre</li>
-          <li>Et avec MICHELIN Total performance, plus de performances réunies</li>
-        </ul>`
-      },
-      {
-        id: 4,
-        name: 'Weather control A005',
-        brandId: 2,
-        description: `
-        <h3>Points forts</h3>
-        <ul>
-          <li>Maîtrisez votre route, en toutes saisons</li>
-          <li>Certifié pour l'usage sur la neige (marquage 3PMSF)</li>
-          <li>Kilométrage au-delà des attentes du consommateur</li>
-        </ul>`
-      }
-    ]
+    brands: [],
+    tyres: [],
+    error: false
   }
   handleFilterChange = (event) => {
     this.setState({ filter: event.target.value })
@@ -90,6 +28,26 @@ class App extends Component {
     } else {
       alert('la marque est reliée à au moins un pneu, elle ne peut pas être supprimée')
     }
+  }
+
+  componentDidMount () {
+    axios.get('/api/brands')
+      .then(response => {
+        const brands = response.data;
+        this.setState({ brands });
+      })
+      .catch(error => {
+        this.setState({ error: true });
+      });
+
+      axios.get('/api/tyres')
+      .then(response => {
+        const tyres = response.data;
+        this.setState({ tyres });
+      })
+      .catch(error => {
+        this.setState({ error: true });
+      });
   }
 
   render () {
@@ -117,6 +75,7 @@ class App extends Component {
             <li>Un proxy est mis en place dans le package.json pour eviter les pb de cors, l'api est dispo à l'url http://localhost:3000/api</li>
           </ol>
         </div>
+        {this.state.error ? 'Une erreur est survenue...' : null}
         <h2> Liste des marques</h2>
         {brands}
         <h2> Liste des pneus</h2>
