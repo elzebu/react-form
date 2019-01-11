@@ -112,9 +112,9 @@ class App extends Component {
         <div className="intro">
           <h1>But de l'exercice :</h1>
           <ol>
-            <li>Masquer par défaut la liste des marques</li>
-            <li>Rajouter un bouton qui permet d'afficher / masquer la liste des marques</li>
-            <li>Transformer le composant marque en class, et lui rajouter les fonctions du cycle de vie, (avec un console.log), idem pour la class App</li>
+            <li>Remplacer les données du state de App par des données provenant d'une API</li>
+            <li>Aller dans le repertoire API faire npm i + npm start</li>
+            <li>Un proxy est mis en place dans le package.json pour eviter les pb de cors, l'api est dispo à l'url http://localhost:3000/api</li>
           </ol>
         </div>
         <h2> Liste des marques</h2>
