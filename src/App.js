@@ -22,6 +22,7 @@ class App extends Component {
     if (!this.state.tyres.find(tyre => tyre.brandId === id)) {
       const indexToRemove = brands.findIndex(brand => brand.id === id);
       brands.splice(indexToRemove, 1);
+      axios.delete(`/api/brands/${id}`)
       this.setState({
         brands
       })
