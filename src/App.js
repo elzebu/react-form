@@ -71,9 +71,10 @@ class App extends Component {
         <div className="intro">
           <h1>But de l'exercice :</h1>
           <ol>
-            <li>Remplacer les données du state de App par des données provenant d'une API</li>
-            <li>Aller dans le repertoire API faire npm i + npm start</li>
-            <li>Un proxy est mis en place dans le package.json pour eviter les pb de cors, l'api est dispo à l'url http://localhost:3000/api</li>
+            <li>Créer un répertoire "component" et des sous répertoires pour "ranger" nos composants</li>
+            <li>Faire deux nouveaux composants : BrandList et TyreList</li>
+            <li>reprendre tous les concepts vue jusqu'à maintenant : PureComponent, Fragment, Props-type sur Brand et Tyre, focus sur le champ de recherche</li>
+            <li>Refactoriser le code</li>
           </ol>
         </div>
         {this.state.error ? 'Une erreur est survenue...' : null}
