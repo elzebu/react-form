@@ -25,5 +25,9 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "dom-testing-library": "^3.16.3",
+    "react-testing-library": "^5.4.4"
+  }
 }

@@ -10,8 +10,8 @@ class Brands extends React.PureComponent {
 
     return (
       <div className="brands">
-        <h2>Liste des marques</h2>
-        {brands}
+        <h2 onClick={() => console.log('list')}>Liste des marques</h2>
+        {brands.length > 0 ? brands : 'Aucune marque disponible'}
       </div>
     );
   }

@@ -5,9 +5,7 @@ class Brand extends React.Component {
 
     render () {
         return (
-            <React.Fragment onClick={this.props.click}>
-                <h3><img src={this.props.data.src} alt="" height="50" /> {this.props.data.name}</h3>
-            </React.Fragment>
+            <button onClick={() => { console.log('test on click'); this.props.click()} }><img src={this.props.data.src} alt="" height="50" /> {this.props.data.name}</button>
         )
     }
 }
