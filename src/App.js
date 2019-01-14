@@ -1,19 +1,39 @@
 import React, { Component } from 'react';
-import Brand from './Brand';
-import Tyre from './Tyre';
-import './App.css';
+import Brands from './component/Brands/Brands';
+import Tyres from './component/Tyres/Tyres';
 import axios from 'axios';
+import './App.css';
+import Modal from './Modal';
 
 class App extends Component {
 
   state = {
-    filter: '',
+    error: false,
+    errorBrandDelete: false,
     brands: [],
-    tyres: [],
-    error: false
+    tyres: []
   }
-  handleFilterChange = (event) => {
-    this.setState({ filter: event.target.value })
+
+  componentDidMount () {
+    // Fetch tyres
+    axios.get('/api/tyres')
+      .then(response => {
+        const tyres = response.data;
+        this.setState({ tyres });
+      })
+      .catch(error => {
+        this.setState({ error: true });
+      });
+
+    // Fetch Brands
+    axios.get('/api/brands')
+      .then(response => {
+        const brands = response.data;
+        this.setState({ brands });
+      })
+      .catch(error => {
+        this.setState({ error: true });
+      });
   }
 
   handleBrandClick = (id) => {
@@ -27,47 +47,23 @@ class App extends Component {
         brands
       })
     } else {
-      alert('la marque est reliée à au moins un pneu, elle ne peut pas être supprimée')
+      this.setState({ errorBrandDelete: true })
     }
   }
 
-  componentDidMount () {
-    axios.get('/api/brands')
-      .then(response => {
-        const brands = response.data;
-        this.setState({ brands });
-      })
-      .catch(error => {
-        this.setState({ error: true });
-      });
-
-      axios.get('/api/tyres')
-      .then(response => {
-        const tyres = response.data;
-        this.setState({ tyres });
-      })
-      .catch(error => {
-        this.setState({ error: true });
-      });
-  }
-
   render () {
-    const brands = this.state.brands.map(brand => (
-      <Brand data={brand} key={brand.id} click={() => this.handleBrandClick(brand.id)} />
-    ));
-
-    const tyres = this.state.tyres
-      .filter(tyre => tyre.name.toLowerCase().includes(this.state.filter.toLowerCase()))
-      .map(tyre => {
-        const brand = this.state.brands.find(brand => brand.id === tyre.brandId);
-        tyre.brand = brand ? brand : '';
-        return tyre;
-      })
-      .map(tyreWithBrand => {
-        return <Tyre data={tyreWithBrand} key={tyreWithBrand.id} />
-      });
     return (
       <div className="App">
+        {this.state.errorBrandDelete ?
+          <Modal>
+            <div className="overlay"></div>
+            <div className="content" onClick={() => this.setState({errorBrandDelete: false})}>
+              La marque est relié à au moins un pneu, elle ne peut être supprimée.
+          </div>
+          </Modal>
+          :
+          null
+        }
         <div className="intro">
           <h1>But de l'exercice :</h1>
           <ol>
@@ -77,12 +73,9 @@ class App extends Component {
             <li>Refactoriser le code</li>
           </ol>
         </div>
-        {this.state.error ? 'Une erreur est survenue...' : null}
-        <h2> Liste des marques</h2>
-        {brands}
-        <h2> Liste des pneus</h2>
-        <input type="text" onChange={this.handleFilterChange} />
-        {tyres}
+        <div className="error">{this.state.error ? 'Une erreur est survenue...' : null}</div>
+        <Brands brands={this.state.brands} tyres={this.state.tyres} click={this.handleBrandClick} />
+        <Tyres brands={this.state.brands} tyres={this.state.tyres} />
       </div>
     );
   }
