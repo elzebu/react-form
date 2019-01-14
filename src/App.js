@@ -73,7 +73,7 @@ class App extends Component {
           <ol>
             <li>Créer un répertoire "component" et des sous répertoires pour "ranger" nos composants</li>
             <li>Faire deux nouveaux composants : BrandList et TyreList</li>
-            <li>reprendre tous les concepts vue jusqu'à maintenant : PureComponent, Fragment, Props-type sur Brand et Tyre, focus sur le champ de recherche</li>
+            <li>reprendre tous les concepts vue jusqu'à maintenant : PureComponent, Fragment, Props-type sur Brand et Tyre, Portal et focus sur le champ de recherche</li>
             <li>Refactoriser le code</li>
           </ol>
         </div>
