@@ -29,6 +29,8 @@
   "devDependencies": {
     "@react-mock/state": "^0.1.7",
     "axios-mock-adapter": "^1.16.0",
+    "cypress": "^3.1.4",
+    "react-test-renderer": "^16.7.0",
     "react-testing-library": "^5.4.4"
   }
 }

@@ -26,7 +26,13 @@ class Tyres extends React.PureComponent {
       <>
         <h2>Liste des pneus</h2>
         <input type="text" onChange={this.handleFilterChange} />
-        {tyres}
+        <div className="tyresList">
+        {
+          tyres.length > 0 ?
+          tyres
+          : <div class="error">Pas de résultat</div>
+        }
+        </div>
       </>
     );
   }

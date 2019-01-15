@@ -1,10 +1,22 @@
 import React from 'react';
 
+import { create } from 'react-test-renderer';
+
 import Brand from './Brand';
 
 import {render, fireEvent, cleanup} from 'react-testing-library'
 
+
 afterEach(cleanup);
+
+test('snapshot', () => {
+  const component = create(
+    <Brand data={[]} />,
+  );
+  let brand = component.toJSON();
+  expect(brand).toMatchSnapshot();
+});
+
 
 test('calls fonction on click', () => {
     const handleClick = jest.fn();
