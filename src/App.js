@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
-import { Switch, Route, BrowserRouter, Link, Redirect } from 'react-router-dom'
+import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom'
 import axios from 'axios';
+import { Helmet } from 'react-helmet';
 
 import Brands from './component/Brands/Brands';
 import Tyres from './component/Tyres/Tyres';
+import Home from './component/Home';
+import Header from './component/Header';
+import TyreDetail from './component/TyreDetail';
+import TyreEdit from './component/TyreEdit';
+import BrandEdit from './component/BrandEdit';
+
 import './App.css';
 import Modal from './Modal';
 
@@ -18,20 +25,29 @@ class App extends Component {
 
   componentDidMount () {
     // Fetch tyres
-    axios.get('/api/tyres')
-      .then(response => {
-        const tyres = response.data;
-        this.setState({ tyres });
-      })
-      .catch(error => {
-        this.setState({ error: true });
-      });
+    this.handleUpdateTyres();
 
     // Fetch Brands
+    this.handleUpdateBrands();
+  }
+
+  handleUpdateBrands = () => {
+    console.log('update !!!');
     axios.get('/api/brands')
       .then(response => {
         const brands = response.data;
         this.setState({ brands });
+      })
+      .catch(error => {
+        this.setState({ error: true });
+      });
+  }
+
+  handleUpdateTyres = () => {
+    axios.get('/api/tyres')
+      .then(response => {
+        const tyres = response.data;
+        this.setState({ tyres });
       })
       .catch(error => {
         this.setState({ error: true });
@@ -57,6 +73,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
+          <Helmet titleTemplate="%s | allopneu.com"></Helmet>
           <div className="intro">
             <ul>
               <li>Créer un composant Home</li>
@@ -66,11 +83,7 @@ class App extends Component {
               <li>Faire de même pour les marques</li>
             </ul>
           </div>
-          <header>
-            <Link to="/">Home</Link>
-            <Link to="/tyres">Pneu</Link>
-            <Link to="/brands">Marque</Link>
-          </header>
+          <Header />
           {this.state.errorBrandDelete ?
             <Modal>
               <div className="overlay"></div>
@@ -82,9 +95,12 @@ class App extends Component {
             null
           }
           <Switch>
-            <Route exact path="/" render={() => <div><h1>Hello world !</h1></div>} />
+            <Route exact path="/" component={Home} />
             <Route exact path="/tyres" render={() => <Tyres brands={this.state.brands} tyres={this.state.tyres} />} />
+            <Route exact path="/tyres/detail/:id" component={TyreDetail} />
+            <Route exact path="/tyres/detail/:id/edit" render={() => <TyreEdit update={this.handleUpdateTyres} />} />
             <Route exact path="/brands" render={() => <Brands brands={this.state.brands} tyres={this.state.tyres} click={this.handleBrandClick} />} />
+            <Route exact path="/brands/:id/edit" render={() => <BrandEdit update={this.handleUpdateBrands} />} />
             <Redirect from="*" to="/" />
           </Switch>
         </div>

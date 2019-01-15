@@ -3,7 +3,7 @@
     {
       "id": 1,
       "src": "https://www.logodesignlove.com/images/classic/michelin-man-running.jpg",
-      "name": "michelin"
+      "name": "michelin +"
     },
     {
       "id": 2,
@@ -25,9 +25,9 @@
     },
     {
       "id": 2,
-      "name": "Primacy 4",
-      "brandId": 1,
-      "description": "<h3>Points forts</h3><ul><li>En toute sécurité neuf comme usé</li><li>Excellente longévité</li><li>Très hautes performances de freinage sur sol mouillé</li></ul>"
+      "name": "test",
+      "description": "une description",
+      "brandId": "3"
     },
     {
       "id": 3,

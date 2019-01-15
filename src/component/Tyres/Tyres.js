@@ -15,12 +15,7 @@ class Tyres extends React.PureComponent {
     const tyres = this.props.tyres
       .filter(tyre => tyre.name.toLowerCase().includes(this.state.filter.toLowerCase()))
       .map(tyre => {
-        const brand = this.props.brands.find(brand => brand.id === tyre.brandId);
-        tyre.brand = brand ? brand : '';
-        return tyre;
-      })
-      .map(tyreWithBrand => {
-        return <Tyre data={tyreWithBrand} key={tyreWithBrand.id} />
+        return <Tyre name={tyre.name} id={tyre.id} key={tyre.id} />
       });
     return (
       <>
@@ -30,7 +25,7 @@ class Tyres extends React.PureComponent {
         {
           tyres.length > 0 ?
           tyres
-          : <div class="error">Pas de résultat</div>
+          : <div className="error">Pas de résultat</div>
         }
         </div>
       </>
