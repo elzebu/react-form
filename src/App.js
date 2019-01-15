@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { Switch, Route, BrowserRouter, Link, Redirect } from 'react-router-dom'
+import axios from 'axios';
+
 import Brands from './component/Brands/Brands';
 import Tyres from './component/Tyres/Tyres';
-import axios from 'axios';
 import './App.css';
 import Modal from './Modal';
 
@@ -53,30 +55,40 @@ class App extends Component {
 
   render () {
     return (
-      <div className="App">
-        {this.state.errorBrandDelete ?
-          <Modal>
-            <div className="overlay"></div>
-            <div className="content" onClick={() => this.setState({errorBrandDelete: false})}>
-              La marque est relié à au moins un pneu, elle ne peut être supprimée.
+      <BrowserRouter>
+        <div className="App">
+          <div className="intro">
+            <ul>
+              <li>Créer un composant Home</li>
+              <li>Créer un composant Header et déporter les liens dedans</li>
+              <li>Créer un composant TyreDetail qui affiche le détail d'un pneu et faire une route vers ce dernier</li>
+              <li>Créer un composant TyreEdit qui permet d'editer un pneu et créer une route vers ce dernier</li>
+              <li>Faire de même pour les marques</li>
+            </ul>
           </div>
-          </Modal>
-          :
-          null
-        }
-        <div className="intro">
-          <h1>But de l'exercice :</h1>
-          <ol>
-            <li>Créer un répertoire "component" et des sous répertoires pour "ranger" nos composants</li>
-            <li>Faire deux nouveaux composants : BrandList et TyreList</li>
-            <li>reprendre tous les concepts vue jusqu'à maintenant : PureComponent, Fragment, Props-type sur Brand et Tyre, Portal et focus sur le champ de recherche</li>
-            <li>Refactoriser le code</li>
-          </ol>
+          <header>
+            <Link to="/">Home</Link>
+            <Link to="/tyres">Pneu</Link>
+            <Link to="/brands">Marque</Link>
+          </header>
+          {this.state.errorBrandDelete ?
+            <Modal>
+              <div className="overlay"></div>
+              <div className="content" onClick={() => this.setState({ errorBrandDelete: false })}>
+                La marque est relié à au moins un pneu, elle ne peut être supprimée.
+              </div>
+            </Modal>
+            :
+            null
+          }
+          <Switch>
+            <Route exact path="/" render={() => <div><h1>Hello world !</h1></div>} />
+            <Route exact path="/tyres" render={() => <Tyres brands={this.state.brands} tyres={this.state.tyres} />} />
+            <Route exact path="/brands" render={() => <Brands brands={this.state.brands} tyres={this.state.tyres} click={this.handleBrandClick} />} />
+            <Redirect from="*" to="/" />
+          </Switch>
         </div>
-        <div className="error">{this.state.error ? 'Une erreur est survenue...' : null}</div>
-        <Brands brands={this.state.brands} tyres={this.state.tyres} click={this.handleBrandClick} />
-        <Tyres brands={this.state.brands} tyres={this.state.tyres} />
-      </div>
+      </BrowserRouter>
     );
   }
 }
