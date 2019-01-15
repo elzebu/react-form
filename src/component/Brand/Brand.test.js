@@ -1,11 +1,14 @@
 import React from 'react';
 
-import ReactDOM from 'react-dom';
 import Brand from './Brand';
 
-it('calls fonction on click', () => {
+import {render, fireEvent, cleanup} from 'react-testing-library'
+
+afterEach(cleanup);
+
+test('calls fonction on click', () => {
     const handleClick = jest.fn();
-    const container = document.createElement('div');
+
     const brand =
     {
         'id': 1,
@@ -13,12 +16,10 @@ it('calls fonction on click', () => {
         'src': 'test'
     }
 
-    ReactDOM.render(<Brand data={brand} click={handleClick} />, container);
+    const {container} = render(<Brand data={brand} click={handleClick} />);
 
-    const button = container.querySelector('button');
-   
-    button.dispatchEvent(new Event('click'));
+    const title = container.querySelector('h3');
 
-
-    expect(handleClick).toHaveBeenCalledTimes(1);
+    fireEvent.click(title);
+    expect(handleClick).toHaveBeenCalled();
 })
