@@ -76,11 +76,9 @@ class App extends Component {
           <Helmet titleTemplate="%s | allopneu.com"></Helmet>
           <div className="intro">
             <ul>
-              <li>Créer un composant Home</li>
-              <li>Créer un composant Header et déporter les liens dedans</li>
-              <li>Créer un composant TyreDetail qui affiche le détail d'un pneu et faire une route vers ce dernier</li>
-              <li>Créer un composant TyreEdit qui permet d'editer un pneu et créer une route vers ce dernier</li>
-              <li>Faire de même pour les marques</li>
+              <li>Mettre en place des actions / reducers pour tyres Brands (init, update, delete)</li>
+              <li>Deplacer les appel ajax dans les action creator async</li>
+              <li>Faire un peu de refacto !</li>
             </ul>
           </div>
           <Header />
