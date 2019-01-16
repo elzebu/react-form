@@ -1,15 +1,24 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 
-const Header = () => {
+const Header = (props) => {
     return (
     <header>
         <Link to="/">Home</Link>
         <Link to="/tyres">Pneu</Link>
         <Link to="/brands">Marque</Link>
+
+        <span>counter : {props.counter}</span>
     </header>
     )
 
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+    return {
+        counter : state.count
+    }
+}
+
+export default connect(mapStateToProps)(Header);

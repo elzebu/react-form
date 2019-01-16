@@ -3,6 +3,9 @@ import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
+import {connect} from 'react-redux';
+import * as type from '../../redux/actionTypes';
+
 class TyreEdit extends React.Component {
 
     state = {
@@ -32,6 +35,7 @@ class TyreEdit extends React.Component {
                     updated: true
                 });
                 this.props.update();
+                this.props.updateCounter();
             });
     }
 
@@ -99,4 +103,10 @@ class TyreEdit extends React.Component {
     }
 }
 
-export default withRouter(TyreEdit);
+const mapDispatchToProps = dispatch => {
+    return {
+        updateCounter: () => dispatch({type: type.UPDATE_COUNTER})
+    }
+}
+
+export default connect(null, mapDispatchToProps)(withRouter(TyreEdit));
