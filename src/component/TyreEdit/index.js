@@ -13,7 +13,6 @@ class TyreEdit extends React.Component {
             name: '',
             description: ''
         },
-        brands: [],
         updated: false
     }
 
@@ -30,13 +29,9 @@ class TyreEdit extends React.Component {
         axios.put(`/api/tyres/${this.props.match.params.id}`, this.state.tyre)
             .then(response => {
                 let tyre = response.data;
-                this.setState({
-                    tyre,
-                    updated: true
-                });
-                this.props.update();
-                this.props.updateCounter();
+                this.setState(tyre);
             });
+        this.props.updateCounter();
     }
 
     componentDidMount () {
@@ -49,21 +44,11 @@ class TyreEdit extends React.Component {
             .catch(error => {
                 this.setState({ error: true });
             });
-
-        // Fetch Brands
-        axios.get('/api/brands')
-            .then(response => {
-                const brands = response.data;
-                this.setState({ brands });
-            })
-            .catch(error => {
-                this.setState({ error: true });
-            });
     }
 
     render () {
 
-        const options = this.state.brands.map(brand =>
+        const options = this.props.brands.map(brand =>
             <option value={brand.id} key={brand.id}>{brand.name}</option>
         )
 
@@ -103,10 +88,16 @@ class TyreEdit extends React.Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = (state) => {
     return {
-        updateCounter: () => dispatch({type: type.UPDATE_COUNTER})
+        brands: state.brands
     }
 }
 
-export default connect(null, mapDispatchToProps)(withRouter(TyreEdit));
+const mapDispatchToProps = dispatch => {
+    return {
+        updateCounter: () => dispatch({type: type.UPDATE_COUNTER}),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(TyreEdit));

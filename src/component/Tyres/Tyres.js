@@ -1,10 +1,24 @@
 import React from 'react';
 import Tyre from '../../component/Tyre/Tyre';
+import axios from 'axios';
 
 class Tyres extends React.PureComponent {
 
   state = {
     filter: '',
+    tyres: [],
+    error: false
+  }
+
+  componentDidMount() {
+    axios.get('/api/tyres')
+            .then(response => {
+                const tyres = response.data;
+               this.setState({tyres: tyres});
+            })
+            .catch(error => {
+               this.setState({error: true})
+            });
   }
 
   handleFilterChange = (event) => {
@@ -12,7 +26,7 @@ class Tyres extends React.PureComponent {
   }
 
   render () {
-    const tyres = this.props.tyres
+    const tyres = this.state.tyres
       .filter(tyre => tyre.name.toLowerCase().includes(this.state.filter.toLowerCase()))
       .map(tyre => {
         return <Tyre name={tyre.name} id={tyre.id} key={tyre.id} />

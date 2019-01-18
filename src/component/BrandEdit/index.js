@@ -1,8 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import {withRouter} from 'react-router-dom';
-import {connect} from 'react-redux';
-import {asyncUpdateCounter} from '../../redux/actions';
 
 
 class BrandEdit extends React.Component {
@@ -80,10 +78,4 @@ class BrandEdit extends React.Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        updateCounter: () => dispatch(asyncUpdateCounter())
-    }
-}
-
-export default connect(null, mapDispatchToProps)(withRouter(BrandEdit));
+export default withRouter(BrandEdit);

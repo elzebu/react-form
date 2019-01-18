@@ -4,7 +4,10 @@ import thunk from  'redux-thunk';
 import * as reducers from './reducers'
 
 const initialState = {
-    count: 0
+    count: 0,
+    brands: [],
+    tyres: [],
+    error: ''
 }
 
 const logger = store => {
