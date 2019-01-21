@@ -23,9 +23,7 @@ class App extends Component {
           <Helmet titleTemplate="%s | allopneu.com"></Helmet>
           <div className="intro">
             <ul>
-              <li>Mettre en place des actions / reducers pour tyres Brands (init, update, delete)</li>
-              <li>Deplacer les appel ajax dans les action creator async</li>
-              <li>Faire un peu de refacto !</li>
+              <li>Mettre en place le code splitting</li>
             </ul>
           </div>
           <Header />
