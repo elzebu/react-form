@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/preset-env": "^7.2.3",
+    "@babel/register": "^7.0.0",
     "axios": "^0.18.0",
+    "babel-cli": "^6.26.0",
+    "express": "^4.16.4",
     "http-proxy-middleware": "^0.19.1",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
@@ -21,7 +25,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test:coverage": "npm run test -- --coverage",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "serve": "npm run build && node server/index.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -33,9 +38,12 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.2.3",
+    "@babel/preset-react": "^7.0.0",
     "@react-mock/state": "^0.1.7",
     "axios-mock-adapter": "^1.16.0",
     "cypress": "^3.1.4",
+    "ignore-styles": "^5.0.1",
     "react-test-renderer": "^16.7.0",
     "react-testing-library": "^5.4.4"
   }

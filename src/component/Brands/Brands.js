@@ -26,9 +26,12 @@ class Brands extends React.PureComponent {
   }
 
   render () {
-    const brands = this.props.brands.map(brand => (
-      <Brand data={brand} key={brand.id}  tyres={this.state.tyres}/>
-    ));
+    let brands = null;
+    if(this.props.brands) {
+      brands = this.props.brands.map(brand => (
+        <Brand data={brand} key={brand.id}  tyres={this.state.tyres}/>
+      ));
+    }
 
     return (
       <div className="brands">

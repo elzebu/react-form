@@ -32,7 +32,13 @@ export const fetchBrands = () => {
     return dispatch => {
         axios.get('/api/brands')
             .then(response => {
-                const brands = response.data;
+                // const brands = response.data;
+                const brands = [{
+                    id: 1,
+                    name: 'Michelin',
+                    src: ''
+                }]
+
                 dispatch(setBrands(brands));
             })
             .catch(error => {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom'
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import { fetchBrands } from './redux/actions';
@@ -13,25 +13,25 @@ import Header from './component/Header';
 import TyreDetail from './component/TyreDetail';
 
 import BrandEdit from './component/BrandEdit';
+import TyreEdit from './component/TyreEdit';
 
 import './App.css';
 
-const LoadableTyreEdit = Loadable({
-  loader: () => import('./component/TyreEdit', /* webpackChunkName: "tyreEdit" */),
-  loading: () => <h1>chargement...</h1>,
-});
+// const LoadableTyreEdit = Loadable({
+//   loader: () => import('./component/TyreEdit', /* webpackChunkName: "tyreEdit" */),
+//   loading: () => <h1>chargement...</h1>,
+// });
 
 class App extends Component {
 
 
-  onMouseOver = () => {
-    LoadableTyreEdit.preload();
-  }
+  // onMouseOver = () => {
+  //   LoadableTyreEdit.preload();
+  // }
 
   render () {
     return (
-      <BrowserRouter>
-        <div className="App" onMouseOver={this.onMouseOver}>
+        <div className="App">
           <Helmet titleTemplate="%s | allopneu.com"></Helmet>
           <div className="intro">
             <ul>
@@ -43,15 +43,15 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route exact path="/tyres" component={Tyres} />} />
             <Route exact path="/tyres/detail/:id" component={TyreDetail} />
-            <Route exact path="/tyres/detail/:id/edit" component={LoadableTyreEdit} />
+            <Route exact path="/tyres/detail/:id/edit" component={TyreEdit} />
             <Route exact path="/brands" component={Brands} />
             <Route exact path="/brands/:id/edit" component={BrandEdit} />
             <Redirect from="*" to="/" />
           </Switch>
         </div>
-      </BrowserRouter>
     );
   }
+
 }
 
 const mapStateToProps = (state) => {
@@ -67,4 +67,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
