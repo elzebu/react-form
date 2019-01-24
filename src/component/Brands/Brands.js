@@ -5,7 +5,9 @@ class Brands extends React.PureComponent {
 
   render () {
     const brands = this.props.brands.map(brand => (
-      <Brand data={brand} key={brand.id} click={() => this.props.click(brand.id)} />
+      <Brand data={brand} key={brand.id} click={() => {
+        console.log('test'); this.props.click(brand.id)
+      } } />
     ));
 
     return (

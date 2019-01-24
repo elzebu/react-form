@@ -37,6 +37,7 @@ class App extends Component {
   }
 
   handleBrandClick = (id) => {
+    console.log(id);
     const brands = [...this.state.brands];
     // check if brand is deletable
     if (!this.state.tyres.find(tyre => tyre.brandId === id)) {
@@ -74,7 +75,9 @@ class App extends Component {
           </ol>
         </div>
         <div className="error">{this.state.error ? 'Une erreur est survenue...' : null}</div>
-        <Brands brands={this.state.brands} tyres={this.state.tyres} click={this.handleBrandClick} />
+        <Brands 
+         brands={this.state.brands}
+         click={this.handleBrandClick} />
         <Tyres brands={this.state.brands} tyres={this.state.tyres} />
       </div>
     );
