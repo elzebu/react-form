@@ -2,7 +2,6 @@ import React from 'react';
 import Brand from './Brand';
 
 const Tyre = (props) => {
-    console.log('description', props.data)
     return (
         <div className="tyre border-bottom p-2">
             <h2>test {props.data.name}</h2>

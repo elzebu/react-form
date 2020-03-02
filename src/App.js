@@ -10,6 +10,7 @@ function App() {
   const [brands, setBrands] = useState(data.brands)
   const [tyres] = useState(data.tyres)
   const [filter, setFilter] = useState('')
+  const [displayBrand, setDisplayBrand] = useState(false)
 
   const handleBrandClick = (id) => {
     const newBrands = [...brands];
@@ -51,17 +52,21 @@ function App() {
         </ol>
       </div>
 
-      <div class="row">
-        <div class="col">
-          <div className="bg-light border p-3">
-            <h2>Liste des marques</h2>
-            {brandsDOM}
-          </div>
+      <div className="row">
+        <div className="col">
+          <button onClick={() => setDisplayBrand(!displayBrand)}>Afficher les marques</button>
+          {displayBrand ?
+            <div className="bg-light border p-3">
+              <h2>Liste des marques</h2>
+              {brandsDOM}
+            </div>
+            : null
+          }
         </div>
-        <div class="col">
+        <div className="col">
           <div className="bg-light border p-3">
             <h2>Liste des pneus</h2>
-            <input type="text" class="w-100" placeholder="rechercher" onChange={(evt) => setFilter(evt.target.value)} />
+            <input type="text" className="w-100" placeholder="rechercher" onChange={(evt) => setFilter(evt.target.value)} />
             {tyresDOM}
           </div>
         </div>
