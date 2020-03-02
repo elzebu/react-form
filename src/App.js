@@ -1,23 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import './App.css';
 import { data } from './data'
 import Brand from './Brand'
 import Tyre from './Tyre'
 
+import axios from 'axios'
+
 function App() {
 
-  const [brands, setBrands] = useState(data.brands)
-  const [tyres] = useState(data.tyres)
+  const [brands, setBrands] = useState([])
+  const [tyres, setTyres] = useState([])
   const [filter, setFilter] = useState('')
   const [displayBrand, setDisplayBrand] = useState(false)
+  const [error, setError] = useState(false)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responseBrand = await axios.get('/api/brands')
+        setBrands(responseBrand.data)
+
+        const responseTyre = await axios.get('/api/tyres')
+        setTyres(responseTyre.data)
+
+      } catch (error) {
+        setError(true)
+      }
+    }
+    fetchData()
+  }, [])
+
 
   const handleBrandClick = (id) => {
     const newBrands = [...brands];
     // check if brand is deletable
     if (!data.tyres.find(tyre => tyre.brandId === id)) {
-      const indexToRemove = newBrands.findIndex(brand => brand.id === id);
-      newBrands.splice(indexToRemove, 1);
+      const indexToRemove = newBrands.findIndex(brand => brand.id === id)
+      newBrands.splice(indexToRemove, 1)
+      axios.delete(`/api/brands${id}`)
       setBrands(newBrands)
     } else {
       alert('la marque est reliée à au moins un pneu, elle ne peut pas être supprimée')
@@ -46,12 +67,12 @@ function App() {
       <div className="alert alert-primary">
         <h1>But de l'exercice :</h1>
         <ol>
-            <li>Remplacer les données du state de App par des données provenant d'une API</li>
-            <li>Aller dans le repertoire API faire npm i + npm start</li>
-            <li>Un proxy est mis en place dans le package.json pour eviter les pb de cors, l'api est dispo à l'url http://localhost:3000/api</li>
+          <li>Remplacer les données du state de App par des données provenant d'une API</li>
+          <li>Aller dans le repertoire API faire npm i + npm start</li>
+          <li>Un proxy est mis en place dans le package.json pour eviter les pb de cors, l'api est dispo à l'url http://localhost:3000/api</li>
         </ol>
       </div>
-
+      {error ? <div className="alert">Une erreur est survenue...</div> : null}
       <div className="row">
         <div className="col">
           <button onClick={() => setDisplayBrand(!displayBrand)}>Afficher les marques</button>
