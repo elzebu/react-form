@@ -67,9 +67,7 @@ function App() {
       <div className="alert alert-primary">
         <h1>But de l'exercice :</h1>
         <ol>
-          <li>Remplacer les données du state de App par des données provenant d'une API</li>
-          <li>Aller dans le repertoire API faire npm i + npm start</li>
-          <li>Un proxy est mis en place dans le package.json pour eviter les pb de cors, l'api est dispo à l'url http://localhost:3000/api</li>
+          <li>Rajouter les prop-type sur Brand et sur Tyre</li>
         </ol>
       </div>
       {error ? <div className="alert">Une erreur est survenue...</div> : null}
