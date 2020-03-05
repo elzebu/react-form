@@ -1,5 +1,7 @@
-import React from 'react';
-import Brand from './Brand';
+import React from 'react'
+import Brand from './Brand'
+
+import PropTypes from 'prop-types'
 
 const Tyre = (props) => {
     return (
@@ -11,4 +13,11 @@ const Tyre = (props) => {
     )
 }
 
-export default Tyre;
+Tyre.propTypes = {
+    data: PropTypes.shape({
+        name: PropTypes.string,
+        description: PropTypes.string
+    })
+}
+
+export default Tyre

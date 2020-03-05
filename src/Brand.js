@@ -1,4 +1,6 @@
-import React from 'react';
+import React from 'react'
+
+import PropTypes from 'prop-types'
 
 class Brand extends React.Component {
     constructor(props) {
@@ -41,6 +43,13 @@ class Brand extends React.Component {
             </div>
         )
     }
+}
+
+Brand.propTypes = {
+    data: PropTypes.shape({
+        src: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired
+    })
 }
 
 export default Brand;
