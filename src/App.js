@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import './App.css';
 import { data } from './data'
@@ -14,6 +14,8 @@ function App() {
   const [filter, setFilter] = useState('')
   const [displayBrand, setDisplayBrand] = useState(false)
   const [error, setError] = useState(false)
+
+  const inputRef = useRef()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,6 +33,8 @@ function App() {
     fetchData()
   }, [])
 
+  // Set focus on search on first load
+  useEffect(() => inputRef.current.focus(), [])
 
   const handleBrandClick = (id) => {
     const newBrands = [...brands];
@@ -85,7 +89,7 @@ function App() {
         <div className="col">
           <div className="bg-light border p-3">
             <h2>Liste des pneus</h2>
-            <input type="text" className="w-100" placeholder="rechercher" onChange={(evt) => setFilter(evt.target.value)} />
+            <input type="text" ref={inputRef} className="w-100" placeholder="rechercher" onChange={(evt) => setFilter(evt.target.value)} />
             {tyresDOM}
           </div>
         </div>
