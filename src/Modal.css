@@ -1,0 +1,7 @@
+#modal .content {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    width: 300px;
+    transform: translate(-50%, 0);
+}

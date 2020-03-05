@@ -4,6 +4,7 @@ import './App.css';
 import { data } from './data'
 import Brand from './Brand'
 import Tyre from './Tyre'
+import Modal from './Modal';
 
 import axios from 'axios'
 
@@ -14,6 +15,7 @@ function App() {
   const [filter, setFilter] = useState('')
   const [displayBrand, setDisplayBrand] = useState(false)
   const [error, setError] = useState(false)
+  const [deleteError, setDeleteError] = useState(false)
 
   const inputRef = useRef()
 
@@ -45,7 +47,7 @@ function App() {
       axios.delete(`/api/brands${id}`)
       setBrands(newBrands)
     } else {
-      alert('la marque est reliée à au moins un pneu, elle ne peut pas être supprimée')
+      setDeleteError(true)
     }
   }
 
@@ -74,6 +76,15 @@ function App() {
           <li>Mise en pratique remplacer l’alerte de suppression d’une marque par une modale</li>
         </ol>
       </div>
+      {deleteError ?
+          <Modal>
+            <div className="content alert alert-danger" onClick={() => setDeleteError(false)}>
+              La marque est relié à au moins un pneu, elle ne peut être supprimée.
+            </div>
+          </Modal>
+          :
+          null
+      }
       {error ? <div className="alert">Une erreur est survenue...</div> : null}
       <div className="row">
         <div className="col">
