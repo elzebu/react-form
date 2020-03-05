@@ -73,17 +73,18 @@ function App() {
       <div className="alert alert-primary">
         <h1>But de l'exercice :</h1>
         <ol>
-          <li>Mise en pratique remplacer l’alerte de suppression d’une marque par une modale</li>
+          <li>Créer un répertoire "component" et des sous répertoires pour "ranger" nos composants</li>
+          <li>Faire deux nouveaux composants : BrandList et TyreList en reprenant les concepts vus (Fragment, Props-type)</li>
         </ol>
       </div>
       {deleteError ?
-          <Modal>
-            <div className="content alert alert-danger" onClick={() => setDeleteError(false)}>
-              La marque est relié à au moins un pneu, elle ne peut être supprimée.
+        <Modal>
+          <div className="content alert alert-danger" onClick={() => setDeleteError(false)}>
+            La marque est relié à au moins un pneu, elle ne peut être supprimée.
             </div>
-          </Modal>
-          :
-          null
+        </Modal>
+        :
+        null
       }
       {error ? <div className="alert">Une erreur est survenue...</div> : null}
       <div className="row">
