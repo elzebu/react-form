@@ -67,7 +67,7 @@ function App() {
       <div className="alert alert-primary">
         <h1>But de l'exercice :</h1>
         <ol>
-          <li>Rajouter les prop-type sur Brand et sur Tyre</li>
+          <li>Mettre le focus sur le champ de recherche au chargement de la page</li>
         </ol>
       </div>
       {error ? <div className="alert">Une erreur est survenue...</div> : null}
