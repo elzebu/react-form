@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import './App.css';
 import { data } from './data'
@@ -8,12 +8,18 @@ import Modal from './Modal';
 
 import axios from 'axios'
 
+import useOnClickOutside from './hooks/useOnClickOutside'
+
 function App() {
 
   const [brands, setBrands] = useState([])
   const [tyres, setTyres] = useState([])
   const [error, setError] = useState(false)
   const [deleteError, setDeleteError] = useState(false)
+
+  const ref = useRef()
+
+  useOnClickOutside(ref, () => (deleteError) ? setDeleteError(false): null)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,7 +60,7 @@ function App() {
       </div>
       {deleteError ?
         <Modal>
-          <div className="content alert alert-danger" onClick={() => setDeleteError(false)}>
+          <div  ref={ref} className="content alert alert-danger">
             La marque est relié à au moins un pneu, elle ne peut être supprimée.
             </div>
         </Modal>
