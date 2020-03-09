@@ -49,8 +49,7 @@ function App() {
       <div className="alert alert-primary">
         <h1>But de l'exercice :</h1>
         <ol>
-          <li>Créer un répertoire "component" et des sous répertoires pour "ranger" nos composants</li>
-          <li>Faire deux nouveaux composants : BrandList et TyreList en reprenant les concepts vus (Fragment, Props-type)</li>
+          <li>Créer un custom Hook qui gère le click hors de la zone cible (pour fermer la popin)</li>
         </ol>
       </div>
       {deleteError ?
