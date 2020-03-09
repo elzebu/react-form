@@ -9,7 +9,9 @@ function Tyres({ brands, tyres }) {
     const inputRef = useRef()
     
     // Set focus on search on first load
-    useEffect(() => inputRef.current.focus(), [])
+    useEffect(() => {
+        (inputRef && inputRef.current) && inputRef.current.focus()
+    }, [])
 
     const tyresDOM = tyres
         .filter(tyre => tyre.name.toLowerCase().includes(filter.toLowerCase()))

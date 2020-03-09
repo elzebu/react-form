@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Tyres /> matches previous snapshot 1`] = `
+Array [
+  <h2>
+    Liste des pneus
+  </h2>,
+  <input
+    className="w-100"
+    onChange={[Function]}
+    placeholder="rechercher"
+    type="text"
+  />,
+]
+`;

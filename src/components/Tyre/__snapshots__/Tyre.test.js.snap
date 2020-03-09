@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Tyre /> matches previous snapshot 1`] = `
+<div
+  className="tyre border-bottom p-2"
+>
+  <h2>
+    name
+  </h2>
+  <div
+    className="brand row"
+  >
+    <div
+      className="col"
+    >
+      <h3>
+        <img
+          alt=""
+          height="50"
+          src=""
+        />
+         
+        brandName
+      </h3>
+    </div>
+    <div
+      className="col text-right"
+    />
+  </div>
+  <div
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "description",
+      }
+    }
+  />
+</div>
+`;
