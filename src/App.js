@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import './App.css';
 import { data } from './data'
-import Brand from './Brand'
-import Tyre from './Tyre'
+import Brands from './components/Brands/Brands'
+import Tyres from './components/Tyres/Tyres'
 import Modal from './Modal';
 
 import axios from 'axios'
@@ -12,12 +12,8 @@ function App() {
 
   const [brands, setBrands] = useState([])
   const [tyres, setTyres] = useState([])
-  const [filter, setFilter] = useState('')
-  const [displayBrand, setDisplayBrand] = useState(false)
   const [error, setError] = useState(false)
   const [deleteError, setDeleteError] = useState(false)
-
-  const inputRef = useRef()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,9 +31,6 @@ function App() {
     fetchData()
   }, [])
 
-  // Set focus on search on first load
-  useEffect(() => inputRef.current.focus(), [])
-
   const handleBrandClick = (id) => {
     const newBrands = [...brands];
     // check if brand is deletable
@@ -50,23 +43,6 @@ function App() {
       setDeleteError(true)
     }
   }
-
-
-  const brandsDOM = brands.map(brand => (
-    <Brand data={brand} key={brand.id} click={() => handleBrandClick(brand.id)} />
-  ));
-
-  const tyresDOM = tyres
-    .filter(tyre => tyre.name.toLowerCase().includes(filter.toLowerCase()))
-    .map(tyre => {
-      const brand = brands.find(brand => brand.id === tyre.brandId)
-      tyre.brand = brand ? brand : null;
-      return tyre;
-    })
-    .map(tyreWithBrand => {
-      return <Tyre data={tyreWithBrand} key={tyreWithBrand.id} />
-    });
-
 
   return (
     <div className="App">
@@ -89,20 +65,13 @@ function App() {
       {error ? <div className="alert">Une erreur est survenue...</div> : null}
       <div className="row">
         <div className="col">
-          <button onClick={() => setDisplayBrand(!displayBrand)}>Afficher les marques</button>
-          {displayBrand ?
-            <div className="bg-light border p-3">
-              <h2>Liste des marques</h2>
-              {brandsDOM}
-            </div>
-            : null
-          }
+          <div className="bg-light border p-3">
+            <Brands brands={brands} click={handleBrandClick} />
+          </div>
         </div>
         <div className="col">
           <div className="bg-light border p-3">
-            <h2>Liste des pneus</h2>
-            <input type="text" ref={inputRef} className="w-100" placeholder="rechercher" onChange={(evt) => setFilter(evt.target.value)} />
-            {tyresDOM}
+            <Tyres brands={brands} tyres={tyres} />
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React from 'react'
-import Brand from './Brand'
-
 import PropTypes from 'prop-types'
+
+import Brand from '../Brand/Brand'
 
 const Tyre = (props) => {
     return (
