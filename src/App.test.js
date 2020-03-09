@@ -1,9 +1,17 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+import React from 'react'
+import { render } from '@testing-library/react'
+import App from './App'
+import axios from 'axios'
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+
+describe('<App />', () => {
+
+
+  it('calls api on render', () => {
+    const getSpy = jest.spyOn(axios, 'get')
+    render(<App />)
+    expect(getSpy).toHaveBeenCalled()
+  })
+
+})
+

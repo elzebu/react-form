@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Brands /> matches previous snapshot 1`] = `
+<button
+  onClick={[Function]}
+>
+  Afficher
+   les marques
+</button>
+`;
+
+exports[`matches previous snapshot 1`] = `
+<button
+  onClick={[Function]}
+>
+  Afficher
+   les marques
+</button>
+`;

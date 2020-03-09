@@ -55,7 +55,7 @@ function App() {
       <div className="alert alert-primary">
         <h1>But de l'exercice :</h1>
         <ol>
-          <li>Créer un custom Hook qui gère le click hors de la zone cible (pour fermer la popin)</li>
+          <li>Mettre en place les tests unitaires pour les pneus</li>
         </ol>
       </div>
       {deleteError ?
