@@ -1,7 +1,8 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import {connect} from 'react-redux'
 
-export default function Header() {
+function Header({ theme }) {
     return (
         <header>
             <ul className="nav nav-pills mb-3">
@@ -15,6 +16,15 @@ export default function Header() {
                     <NavLink className="nav-link" exact={true} activeClassName="active" to="/brands">Marque</NavLink>
                 </li>
             </ul>
+            { theme }
         </header>
     )
 }
+
+const mapStateToProps = (state) => {
+    return {
+        theme : state.theme
+    }
+}
+
+export default connect(mapStateToProps)(Header)

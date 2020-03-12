@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
+import { switchTheme } from '../../redux/actions'
 
 import Brand from '../Brand/Brand'
 
-function Brands({ brands, click }) {
+function Brands({ brands, click, switchTheme }) {
 
     const [displayBrand, setDisplayBrand] = useState(false)
     
@@ -15,6 +17,7 @@ function Brands({ brands, click }) {
         <button onClick={() => setDisplayBrand(!displayBrand)}>
             {!displayBrand ?'Afficher': 'Masquer'} les marques
         </button>
+        <button onClick={() => switchTheme()}>switch theme</button>
           {displayBrand ?
             <>
                 <h2>Liste des marques</h2>
@@ -30,4 +33,10 @@ Brands.propTypes = {
     click: PropTypes.func
 }
 
-export default Brands;
+const mapDispatchToProps = dispatch => {
+    return {
+        switchTheme: () => { dispatch(switchTheme()) }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Brands)
