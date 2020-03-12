@@ -101,7 +101,7 @@ function App() {
                   theme: 'white'
                 }
 
-                const store = createStore(reducers.counter, initialState)
+                const store = createStore(reducers.theme, initialState)
 
                 export default store
                 `}
@@ -146,7 +146,7 @@ function App() {
 
                 const mapDispatchToProps = dispatch => {
                     return {
-                      switchTheme: () => dispatch({type: type.SWITCH_THEME}) // ou utiliser l’action creator dispatch(updateCounter()) 
+                      switchTheme: () => dispatch({type: type.SWITCH_THEME}) // ou utiliser l’action creator dispatch(SwithTheme()) 
                     }
                 }
 
