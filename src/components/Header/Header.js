@@ -1,10 +1,11 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import {connect} from 'react-redux'
+import style from './header.module.css'
 
 function Header({ theme }) {
     return (
-        <header>
+        <header className={style.header}>
             <ul className="nav nav-pills mb-3">
                 <li className="nav-item">
                     <NavLink className="nav-link" exact={true} activeClassName='active' to='/'>Home</NavLink>
