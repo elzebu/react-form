@@ -1,13 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom'
 
 import './App.css';
 import { data } from './data'
 import Brands from './components/Brands/Brands'
-import BrandDetail from './components/BrandDetail/BrandDetail'
 import Tyres from './components/Tyres/Tyres'
-import TyreDetail from './components/TyreDetail/TyreDetail'
-import TyreEdit from './components/TyreEdit/TyreEdit'
 import Modal from './Modal'
 import Home from './components/Home/Home'
 import Header from './components/Header/Header'
@@ -15,6 +12,10 @@ import Header from './components/Header/Header'
 import axios from 'axios'
 
 import useOnClickOutside from './hooks/useOnClickOutside'
+
+const BrandDetail = lazy(() => import('./components/BrandDetail/BrandDetail'))
+const TyreDetail = lazy(() => import('./components/TyreDetail/TyreDetail'))
+const TyreEdit = lazy(() => import('./components/TyreEdit/TyreEdit'))
 
 function App() {
 
@@ -80,14 +81,20 @@ function App() {
           <Route exact path="/" render={() => <Home brands={brands} tyres={tyres} click={handleBrandClick} /> } />
           <Route exact path="/tyres" render={() => <Tyres brands={brands} tyres={tyres} />} />
           <Route exact path="/tyre/:id">
-            <TyreDetail />
+            <Suspense fallback={<div>Loading...</div>}>
+              <TyreDetail />
+            </Suspense>
           </Route>
           <Route exact path="/tyre/:id/edit">
-            <TyreEdit />
+            <Suspense fallback={<div>Loading...</div>}>
+              <TyreEdit />
+            </Suspense>
           </Route>
           <Route exact path="/brands" render={() => <Brands brands={brands} tyres={tyres} click={handleBrandClick} />} />
           <Route exact path="/brand/:id">
-            <BrandDetail />
+            <Suspense fallback={<div>Loading...</div>}>
+              <BrandDetail />
+            </Suspense>
           </Route>
           <Redirect from="*" to="/" />
         </Switch>
