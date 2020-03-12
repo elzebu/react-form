@@ -62,12 +62,99 @@ function App() {
         <div className="alert alert-primary">
           <h1>But de l'exercice :</h1>
           <ol>
-            <li>Installer react-router</li>
-            <li>Créer un composant Home</li>
-            <li>Créer un composant Header et déporter les liens dedans</li>
-            <li>Créer un composant TyreDetail qui affiche le détail d'un pneu et faire une route vers ce dernier</li>
-            <li>Créer un composant TyreEdit qui permet d'editer un pneu et créer une route vers ce dernier</li>
-            <li>Faire de même pour les marques</li>
+            <li>Installer react redux</li>
+            <li>Créer un répertoire redux</li>
+            <li>Dedans créer 4 fichiers : actionTypes.js, actions.js, reducers.js et store.js</li>
+            <li>Dans actionTypes,  définir une constante SWITCH_THEME qui à pour valeur 'SWITCH_THEME'</li>
+            <li>Dans action.js,
+              <ul>
+              <li>importer les type d'actions : <pre>import * as type from './actionTypes'</pre></li>
+              <li>définir une action (fonction) switchTheme qui renvoi un objet type: type.SWITCH_THEME</li>
+            </ul>
+            </li>
+            <li>
+            dans le reducer, créer une nouvelle function :
+            <pre>
+            {`
+              export const theme = (state, action) => {
+                switch (action.type) {
+                  case type.SWITCH_THEME:
+                      return {
+                        ...state,
+                        theme: state.theme === 'black' ? 'white' : 'black'
+                      }
+                  default:
+                      return state
+                }
+              }
+              `}
+              </pre>
+            </li>
+            <li>
+              Dans le fichier store.js creer le store
+              <pre>
+                {`
+                import { createStore } from 'redux'
+                import * as reducers from './reducers'
+
+                const initialState = {
+                  theme: 'white'
+                }
+
+                const store = createStore(reducers.counter, initialState)
+
+                export default store
+                `}
+              </pre>
+            </li>
+            <li>
+              Dans le fichier index.js rajouter :
+              <pre>
+              {`
+              import { Provider } from 'react-redux'
+              import store from './redux/store'
+
+              ...
+
+              <Provider store={store}><App /></Provider>
+              `}
+              </pre>
+            </li>
+            <li>
+              Dans le fichier Header.js, on va se connecter au store et afficher le theme en cours.
+              <pre>
+                {`
+                import {connect} from 'react-redux'
+
+                const mapStateToProps = (state) => {
+                      return {
+                          theme : state.theme
+                      }
+                  }
+
+                  export default connect(mapStateToProps)(Header)
+                  `}
+                => Maintenant j'ai dans les props de mon objet la propriété theme que je peux afficher
+              </pre>
+            </li>
+            <li>
+              Dans le fichier que vous souhaitez, on va maintenant mettre en place l'action de changer la valeur du theme.
+              <pre>
+                {`
+                import {connect} from 'react-redux';
+                import * as type from '../../redux/actionTypes';
+
+                const mapDispatchToProps = dispatch => {
+                    return {
+                      switchTheme: () => dispatch({type: type.SWITCH_THEME}) // ou utiliser l’action creator dispatch(updateCounter()) 
+                    }
+                }
+
+                export default connect(null, mapDispatchToProps)(Brands) // mettre le nom du composant que vous pluggez
+                `}
+              </pre>
+              => Il est maintenant possible utiliser la fonction 'switchTheme' sur un click d'un bouton par exemple
+            </li>
           </ol>
         </div>
         <Header />
