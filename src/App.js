@@ -63,7 +63,7 @@ function App() {
         <div className="alert alert-primary">
           <h1>But de l'exercice :</h1>
           <ol>
-            <li>Mettre en place le code splitting</li>
+            <li>Mise en place de CSS Module</li>
           </ol>
         </div>
         <Header />
