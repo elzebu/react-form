@@ -1,10 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom'
 
 import './App.css';
 import { data } from './data'
 import Brands from './components/Brands/Brands'
+import BrandDetail from './components/BrandDetail/BrandDetail'
 import Tyres from './components/Tyres/Tyres'
-import Modal from './Modal';
+import TyreDetail from './components/TyreDetail/TyreDetail'
+import TyreEdit from './components/TyreEdit/TyreEdit'
+import Modal from './Modal'
+import Home from './components/Home/Home'
+import Header from './components/Header/Header'
 
 import axios from 'axios'
 
@@ -51,36 +57,48 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <div className="alert alert-primary">
-        <h1>But de l'exercice :</h1>
-        <ol>
-          <li>Mettre en place les tests unitaires pour les pneus</li>
-        </ol>
-      </div>
-      {deleteError ?
-        <Modal>
-          <div  ref={ref} className="content alert alert-danger">
-            La marque est relié à au moins un pneu, elle ne peut être supprimée.
-            </div>
-        </Modal>
-        :
-        null
-      }
-      {error ? <div className="alert">Une erreur est survenue...</div> : null}
-      <div className="row">
-        <div className="col">
-          <div className="bg-light border p-3">
-            <Brands brands={brands} click={handleBrandClick} />
-          </div>
+    <BrowserRouter>
+      <div className="App">
+        <div className="alert alert-primary">
+          <h1>But de l'exercice :</h1>
+          <ol>
+            <li>Installer react-router</li>
+            <li>Créer un composant Home</li>
+            <li>Créer un composant Header et déporter les liens dedans</li>
+            <li>Créer un composant TyreDetail qui affiche le détail d'un pneu et faire une route vers ce dernier</li>
+            <li>Créer un composant TyreEdit qui permet d'editer un pneu et créer une route vers ce dernier</li>
+            <li>Faire de même pour les marques</li>
+          </ol>
         </div>
-        <div className="col">
-          <div className="bg-light border p-3">
-            <Tyres brands={brands} tyres={tyres} />
-          </div>
-        </div>
+        <Header />
+        {deleteError ?
+          <Modal>
+            <div  ref={ref} className="content alert alert-danger">
+              La marque est relié à au moins un pneu, elle ne peut être supprimée.
+              </div>
+          </Modal>
+          :
+          null
+        }
+        {error ? <div className="alert">Une erreur est survenue...</div> : null}
+        <Switch>
+          <Route exact path="/" render={() => <Home brands={brands} tyres={tyres} click={handleBrandClick} /> } />
+          <Route exact path="/tyres" render={() => <Tyres brands={brands} tyres={tyres} />} />
+          <Route exact path="/tyre/:id">
+            <TyreDetail />
+          </Route>
+          <Route exact path="/tyre/:id/edit">
+            <TyreEdit />
+          </Route>
+          <Route exact path="/brands" render={() => <Brands brands={brands} tyres={tyres} click={handleBrandClick} />} />
+          <Route exact path="/brand/:id">
+            <BrandDetail />
+          </Route>
+          <Redirect from="*" to="/" />
+        </Switch>
+    
       </div>
-    </div>
+    </BrowserRouter>
   );
 }
 

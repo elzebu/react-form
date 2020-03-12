@@ -27,7 +27,7 @@ function Brands({ brands, click }) {
 
 Brands.propTypes = {
     brands: PropTypes.array.isRequired,
-    click: PropTypes.func.isRequired
+    click: PropTypes.func
 }
 
 export default Brands;
