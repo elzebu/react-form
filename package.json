@@ -3,10 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/preset-env": "^7.8.7",
+    "@babel/preset-react": "^7.8.3",
+    "@babel/register": "^7.8.6",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
+    "express": "^4.17.1",
+    "express-http-proxy": "^1.6.0",
     "http-proxy-middleware": "^1.0.1",
+    "ignore-styles": "^5.0.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
@@ -19,7 +25,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "serve": "node server/index.js"
   },
   "eslintConfig": {
     "extends": "react-app"

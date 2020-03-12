@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
-import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 
 import './App.css';
 import { data } from './data'
@@ -58,7 +58,7 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
+    
       <div className="App">
         <div className="alert alert-primary">
           <h1>But de l'exercice :</h1>
@@ -100,7 +100,6 @@ function App() {
         </Switch>
     
       </div>
-    </BrowserRouter>
   );
 }
 

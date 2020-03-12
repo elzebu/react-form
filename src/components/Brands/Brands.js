@@ -8,7 +8,7 @@ import Brand from '../Brand/Brand'
 function Brands({ brands, click, switchTheme }) {
 
     const [displayBrand, setDisplayBrand] = useState(false)
-    
+    console.log(brands)
     const list = brands.map(brand => (
         <Brand data={brand} key={brand.id} click={() => click(brand.id)} />
     ));
