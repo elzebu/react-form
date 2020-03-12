@@ -62,27 +62,7 @@ function App() {
         <div className="alert alert-primary">
           <h1>But de l'exercice :</h1>
           <ol>
-            <li>Créer un middleware logger : dans le fichier store.js créer la fonction logger
-              <pre>
-                {`
-                const logger = store => {
-                      return next => {
-                          return action => {
-                              console.log('[Middleware] dispaching', action)
-                              const result = next(action)
-                              console.log('[Middleware] next state', store.getState())
-                              return result
-                          }
-                       }
-                  }
-                `}
-              </pre>
-              <ul>
-                <li>Rajouter l'import applyMiddleware de redux</li>
-                <li>L’ajouter à createStore <pre>const store = createStore(reducers.counter, initialState, applyMiddleware(logger))</pre></li>
-              </ul>
-            </li>
-
+            <li>Mettre en place le code splitting</li>
           </ol>
         </div>
         <Header />
